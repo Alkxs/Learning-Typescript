@@ -10,6 +10,8 @@ function greet(person: string, date: Date) {
 function getFavoriteNumber(): number {
   return 26
 }
+// Arrays
+let y = arr[]
 
 // Type aliases
 type Point = {
@@ -75,5 +77,16 @@ const myCanvas = <HTMLCanvasElement>document.getElementById('main_canvas')</HTML
 type StringArray = Array<string>
 type NumberArray = Array<number>
 type ObjectWithNameArray = Array<{ name: string }>
+
+// promises
+export const fetchLukeSkywalker = async (): Promise <LukeSkywalker> => {
+  const data = await fetch("<https://swapi.dev/api/people/1>").then((res) => {
+    return res.json();
+  });
+
+  return data;
+};
+
+
 
 // React
