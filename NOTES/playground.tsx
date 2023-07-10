@@ -87,7 +87,9 @@ export const fetchLukeSkywalker = async (): Promise <LukeSkywalker> => {
   return data;
 };
 
-// React
+// REACT
+
+
 // Common to create types folder for specific types and import them where you need them
 
 // Props
@@ -101,5 +103,32 @@ const MyComponent = ({ name, age } : Props) => {
   return <div>{name}, {age}</div>;
 }
 
-// 
+// Event + useState
 
+type Props = {};
+
+const MyFormComponent = ({}: Props) => {
+  const [inputValue, setInputValue] = useState<string>('');
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+  }
+
+  const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    alert(`Button clicked with input: ${inputValue}`);
+  }
+
+  return (
+    <form>
+      <input type="text" value={inputValue} onChange={handleInputChange} />
+      <button onClick={handleClick}>Click me</button>
+    </form>
+  );
+}
+
+// useState Example
+
+const [count, setCount] = useState<number>(0);
+
+// Context API
