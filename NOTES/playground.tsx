@@ -132,3 +132,116 @@ const MyFormComponent = ({}: Props) => {
 const [count, setCount] = useState<number>(0);
 
 // Context API
+
+type ContextType = {
+  user: string;
+  setUser: Dispatch<SetStateAction<string>>;
+};
+
+const MyContext = createContext<ContextType | undefined>(undefined);
+
+type Props = {};
+
+const MyComponent = ({}: Props) => {
+  const [user, setUser] = useState<string>("");
+
+  return (
+    <MyContext.Provider value={{ user, setUser }}>
+    </MyContext.Provider>
+  );
+};
+
+// Reducer
+
+type State = { count: number };
+type Action = { type: 'increment' } | { type: 'decrement' };
+
+const reducer = (state: State, action: Action): State => {
+  switch (action.type) {
+    case 'increment':
+      return { count: state.count + 1 };
+    case 'decrement':
+      return { count: state.count - 1 };
+    default:
+      throw new Error();
+  }
+};
+
+type Props = {};
+
+const Counter = ({}: Props) => {
+  const [state, dispatch] = useReducer(reducer, { count: 0 });
+
+  return (
+    <>
+      Count: {state.count}
+      <button onClick={() => dispatch({ type: 'increment' })}>+1</button>
+      <button onClick={() => dispatch({ type: 'decrement' })}>-1</button>
+    </>
+  );
+};
+
+
+// Context API + useReducer
+
+type State = { count: number };
+type Action = { type: 'increment' } | { type: 'decrement' };
+
+const reducer = (state: State, action: Action): State => {
+  switch (action.type) {
+    case 'increment':
+      return { count: state.count + 1 };
+    case 'decrement':
+      return { count: state.count - 1 };
+    default:
+      throw new Error();
+  }
+};
+
+const CountContext = createContext<[State, Dispatch<Action>];
+
+type CountProviderProps = { children: ReactNode };
+
+const CountProvider = ({ children }: CountProviderProps) => {
+  const contextValue = useReducer(reducer, { count: 0 });
+  return <CountContext.Provider value={contextValue}>{children}</CountContext.Provider>;
+};
+
+const useCount = () => {
+  const context = useContext(CountContext);
+  if (!context) throw new Error("useCount must be used within a CountProvider");
+  return context;
+};
+
+type Props = {};
+
+const Counter = ({}: Props) => {
+  const [state, dispatch] = useCount();
+  return (
+    <>
+      Count: {state.count}
+      <button onClick={() => dispatch({ type: 'increment' })}>+1</button>
+      <button onClick={() => dispatch({ type: 'decrement' })}>-1</button>
+    </>
+  );
+};
+
+const App = () => {
+  return (
+    <CountProvider>
+      <Counter />
+    </CountProvider>
+  );
+};
+
+// Generics
+
+type ItemProps<T> = {
+  id:number,
+  title:string,
+  extra: T[]
+}
+
+const Item = (props: ItemProps<object>)
+
+//
