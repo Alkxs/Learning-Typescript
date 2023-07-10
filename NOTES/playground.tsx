@@ -87,6 +87,19 @@ export const fetchLukeSkywalker = async (): Promise <LukeSkywalker> => {
   return data;
 };
 
-
-
 // React
+// Common to create types folder for specific types and import them where you need them
+
+// Props
+
+type Props {
+  name: string;
+  age: number;
+}
+
+const MyComponent = ({ name, age } : Props) => {
+  return <div>{name}, {age}</div>;
+}
+
+// 
+
