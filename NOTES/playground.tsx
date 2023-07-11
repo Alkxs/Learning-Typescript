@@ -242,6 +242,6 @@ type ItemProps<T> = {
   extra: T[]
 }
 
-const Item = (props: ItemProps<object>)
-
-//
+const Item = (props: ItemProps<object>) => {
+  return <div>Item</div>
+}
