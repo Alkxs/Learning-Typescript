@@ -2,6 +2,7 @@ type Todo = {
   text: string
   completed: boolean
 }
+
 // Initial todos
 let todos: Todo[] = JSON.parse(localStorage.getItem('todos') || '[]')
 
@@ -16,13 +17,15 @@ function renderTodos() {
   todoList.innerHTML = ''
 
   // Render each todo
-  todos.forEach((todo, i) => {
+  todos.forEach((todo) => {
     // Create elements
     const li = document.createElement('li')
-    const text = document.createTextNode(todo.text)
     const checkbox = document.createElement('input')
     checkbox.type = 'checkbox'
     checkbox.checked = todo.completed
+
+    // Assign todo text to the li
+    li.textContent = todo.text
 
     // Event listener to toggle the completed state
     checkbox.addEventListener('change', () => {
@@ -32,7 +35,6 @@ function renderTodos() {
     })
 
     // Append elements
-    li.appendChild(text)
     li.appendChild(checkbox)
     todoList.appendChild(li)
   })
