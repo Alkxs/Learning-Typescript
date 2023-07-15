@@ -1,11 +1,6 @@
-function App() {
-  return
-  ;<>
-    <div className='bg-red-500 w-10'>
-      <input type='text' className='input' />
-      <h1 className=''>sdfsd</h1>
-    </div>
-  </>
-}
+import TodoApp from "./components/Task";
+import { useState } from "react";
 
-export default App
+function App() {}
+
+export default App;
